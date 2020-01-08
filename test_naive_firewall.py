@@ -1,9 +1,64 @@
 import unittest
 
-from naive_firewall import Firewall, FirewallRule
+from firewall_rule import FirewallRule
+from naive_firewall import Firewall
 
 
 class TestNaiveFirewall(unittest.TestCase):
+    def test_no_add_duplicate_rules(self):
+        """Verify that duplicate rules cannot be added."""
+        fw = Firewall()
+        fw.add_fw_rule(
+            FirewallRule(
+                direction="inbound", protocol="tcp", port="80",
+                ip_address="192.168.1.2"
+            )
+        )
+        self.assertEqual(len(fw.fw_rules), 1)
+        fw.add_fw_rule(
+            FirewallRule(
+                direction="inbound", protocol="tcp", port="80",
+                ip_address="192.168.1.2"
+            )
+        )
+        self.assertEqual(len(fw.fw_rules), 1)
+
+    def test_no_add_duplicate_range_port_rules(self):
+        """Verify that duplicate range port rules cannot be added."""
+        fw = Firewall()
+        fw.add_fw_rule(
+            FirewallRule(
+                direction="inbound", protocol="tcp", port="50-100",
+                ip_address="192.168.1.2"
+            )
+        )
+        self.assertEqual(len(fw.fw_rules), 1)
+        fw.add_fw_rule(
+            FirewallRule(
+                direction="inbound", protocol="tcp", port="50-100",
+                ip_address="192.168.1.2"
+            )
+        )
+        self.assertEqual(len(fw.fw_rules), 1)
+
+    def test_no_add_duplicate_ipaddr_rules(self):
+        """Verify that duplicate range IP address rules cannot be added."""
+        fw = Firewall()
+        fw.add_fw_rule(
+            FirewallRule(
+                direction="inbound", protocol="tcp", port="80",
+                ip_address="192.168.1.2-192.168.2.2"
+            )
+        )
+        self.assertEqual(len(fw.fw_rules), 1)
+        fw.add_fw_rule(
+            FirewallRule(
+                direction="inbound", protocol="tcp", port="80",
+                ip_address="192.168.1.2-192.168.2.2"
+            )
+        )
+        self.assertEqual(len(fw.fw_rules), 1)
+
     def test_firewall_allow_packet(self):
         """Verify firewall allows a packet that matches a rule."""
         fw = Firewall()
