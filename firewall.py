@@ -1,4 +1,5 @@
 import csv
+from typing import Optional
 
 
 class IPAddress:
@@ -17,7 +18,7 @@ class IPAddress(object):
     tuple is an octet. For example, IP address 192.168.56.1 is represented as:
     (192, 168, 56, 1).
     """
-    
+
     def __init__(self, ip_address: str):
         """Constructs the tuple to represent the provided IP address."""
         self.octets = tuple([int(octet) for octet in ip_address.split(".")])
@@ -127,7 +128,7 @@ class Firewall(object):
 
     The data structure to store the firewall rules is organized based on
     direction, protocol, and port values.
-    
+
     There are four possible combinations of direction and protocol values:
     Combination 1: direction="inbound", protocol="tcp"
     Combination 2: direction="inbound", protocol="udp"
@@ -151,8 +152,11 @@ class Firewall(object):
     would belong to Combination 1's bucket 0 and bucket 1.
     """
 
-    def __init__(self, csv_file_path: str):
-        """Read and store the firewall rules from the CSV file."""
+    def __init__(self, csv_file_path: Optional[str] = None):
+        """
+        Initialize the firewall by reading and storing the firewall rules of
+        the CSV file.
+        """
         # initialize the data structure to store firewall rules
         num_buckets = 1024
         self.num_ports_bucket = 65536 // num_buckets
@@ -168,11 +172,12 @@ class Firewall(object):
         }
 
         # read firewall rules from CSV file and add them to the data structure
-        with open(csv_file_path, "r") as csv_file:
-            csv_reader = csv.reader(csv_file)
-            for csv_fw_rule in csv_reader:
-                fw_rule = FirewallRule(*csv_fw_rule)
-                self.add_fw_rule(fw_rule)
+        if csv_file_path:
+            with open(csv_file_path, "r") as csv_file:
+                csv_reader = csv.reader(csv_file)
+                for csv_fw_rule in csv_reader:
+                    fw_rule = FirewallRule(*csv_fw_rule)
+                    self.add_fw_rule(fw_rule)
 
     def add_fw_rule(self, fw_rule: FirewallRule) -> None:
         """Add the provided firewall rule to the data structure."""
