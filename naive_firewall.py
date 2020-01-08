@@ -133,7 +133,11 @@ class Firewall(object):
         with open(csv_file_path, "r") as csv_file:
             csv_reader = csv.reader(csv_file)
             for csv_fw_rule in csv_reader:
-                self.fw_rules.add(FirewallRule(*csv_fw_rule))
+                self.add_fw_rule(FirewallRule(*csv_fw_rule))
+
+    def add_fw_rule(self, fw_rule: FirewallRule) -> None:
+        """Add the provided firewall rule to the data structure."""
+        self.fw_rules.add(fw_rule)
 
     def accept_packet(
         self, direction: str, protocol: str, port: int, ip_address: str

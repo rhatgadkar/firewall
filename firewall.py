@@ -172,11 +172,15 @@ class Firewall(object):
             csv_reader = csv.reader(csv_file)
             for csv_fw_rule in csv_reader:
                 fw_rule = FirewallRule(*csv_fw_rule)
-                fw_rules = self.fw_rules[fw_rule.direction][fw_rule.protocol]
-                start_bucket = fw_rule.min_port // self.num_ports_bucket
-                end_bucket = fw_rule.max_port // self.num_ports_bucket
-                for bucket_num in range(start_bucket, end_bucket + 1):
-                    fw_rules[bucket_num].add(fw_rule)
+                self.add_fw_rule(fw_rule)
+
+    def add_fw_rule(self, fw_rule: FirewallRule) -> None:
+        """Add the provided firewall rule to the data structure."""
+        start_bucket = fw_rule.min_port // self.num_ports_bucket
+        end_bucket = fw_rule.max_port // self.num_ports_bucket
+        curr_fw_rules = self.fw_rules[fw_rule.direction][fw_rule.protocol]
+        for bucket_num in range(start_bucket, end_bucket + 1):
+            curr_fw_rules[bucket_num].add(fw_rule)
 
     def accept_packet(
         self, direction: str, protocol: str, port: int, ip_address: str
