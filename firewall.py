@@ -12,7 +12,6 @@ import time
 from typing import Optional
 
 from firewall_rule import FirewallRule
-from ip_address import IPAddress
 
 
 class Firewall(object):
