@@ -48,7 +48,7 @@ if __name__ == "__main__":
     fw = Firewall("500k_rules.csv")
     end_time = time.time()
     duration = end_time - start_time
-    print(f"Firewall time duration to read rules: {duration}")
+    print(f"Firewall time duration to add rules: {duration}")
 
     start_time = time.time()
     print(fw.accept_packet("inbound", "tcp", 80, "192.168.1.2"))
