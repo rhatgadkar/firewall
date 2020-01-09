@@ -29,17 +29,17 @@ class TestFirewall(unittest.TestCase):
         fw = Firewall()
         fw.add_fw_rule(
             FirewallRule(
-                direction="inbound", protocol="tcp", port="50-100",
+                direction="inbound", protocol="tcp", port="50-2000",
                 ip_address="192.168.1.2"
             )
         )
         start_bucket = 50 // fw.num_ports_bucket
-        end_bucket = 100 // fw.num_ports_bucket
+        end_bucket = 2000 // fw.num_ports_bucket
         for bucket_num in range(start_bucket, end_bucket + 1):
             self.assertEqual(len(fw.fw_rules["inbound"]["tcp"][bucket_num]), 1)
         fw.add_fw_rule(
             FirewallRule(
-                direction="inbound", protocol="tcp", port="50-100",
+                direction="inbound", protocol="tcp", port="50-2000",
                 ip_address="192.168.1.2"
             )
         )

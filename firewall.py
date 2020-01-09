@@ -20,12 +20,12 @@ class Firewall(object):
     Combination 3: direction="outbound", protocol="tcp"
     Combination 4: direction="outbound", protocol="udp"
 
-    Each combination contains a list of 1024 buckets. Each bucket is
+    Each combination contains a list of 64 buckets. Each bucket is
     responsible for storing references to unique firewall rules that fall
-    within a range of 64 port values. For example, bucket 0 stores firewall
-    rules for port values between 0-63, bucket 1 stores firewall rules for port
-    values between 64-127, and bucket 1023 stores firewall rules for port
-    values between 65472-65535.
+    within a range of 1024 port values. For example, bucket 0 stores firewall
+    rules for port values between 0-1023, bucket 1 stores firewall rules for
+    port values between 1024-2047, and bucket 63 stores firewall rules for port
+    values between 64512-65535.
 
     Duplicate references to the same firewall rule are prevented from being
     added to the same bucket, because the bucket is a hash-set data structure.
@@ -33,7 +33,7 @@ class Firewall(object):
     It is possible for a firewall rule, which has a range of port values, to
     have references that belong to multiple buckets. For example, references to
     a firewall rule with fields:
-    (direction="inbound", protocol="tcp", port="50-100", IP address="1.1.1.1")
+    (direction="inbound", protocol="tcp", port="50-2000", IP address="1.1.1.1")
     would belong to Combination 1's bucket 0 and bucket 1.
     """
 
@@ -43,7 +43,7 @@ class Firewall(object):
         the CSV file.
         """
         # initialize the data structure to store firewall rules
-        num_buckets = 1024
+        num_buckets = 64
         self.num_ports_bucket = 65536 // num_buckets
         self.fw_rules = {
             "inbound": {
