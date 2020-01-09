@@ -1,3 +1,9 @@
+"""
+This file implements functions to generate random values of the four firewall
+fields. The `get_rand_rule()` function generates a random firewall field.
+"""
+
+
 import random
 from typing import Tuple
 

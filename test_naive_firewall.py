@@ -1,3 +1,11 @@
+"""
+Unit tests to check functionality of naive_firewall.py.
+
+These unit tests can be run in the terminal using this command:
+    python3 test_naive_firewall.py
+"""
+
+
 import unittest
 
 from firewall_rule import FirewallRule

@@ -1,3 +1,6 @@
+"""This file defines the data structure to represent an IP address."""
+
+
 class IPAddress:
     """Defines an `IPAddress` type."""
     pass

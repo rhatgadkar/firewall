@@ -1,3 +1,12 @@
+"""
+This file is a script that generates the 1m_rules.csv file, which contains
+1000000 randomly generated comma-separated firewall rules.
+
+This script can be run in the terminal using this command:
+    python3 generate_1m_rules.csv.py
+"""
+
+
 import csv
 
 from rand_fields import get_rand_rule

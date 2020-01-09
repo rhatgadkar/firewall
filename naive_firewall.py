@@ -1,3 +1,11 @@
+"""
+Implements a naive firewall which stores firewall rules in a list.
+
+This program can be run in the terminal using this command:
+    python3 naive_firewall.py
+"""
+
+
 import csv
 import time
 from typing import Optional

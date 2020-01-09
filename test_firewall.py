@@ -1,3 +1,11 @@
+"""
+Unit tests to check functionality of firewall.py.
+
+These unit tests can be run in the terminal using this command:
+    python3 test_firewall.py
+"""
+
+
 import unittest
 
 from firewall import Firewall

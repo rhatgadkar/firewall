@@ -1,3 +1,12 @@
+"""
+This file implements a firewall which stores firewall rules to account for
+space and time complexity.
+
+This program can be run in the terminal using this command:
+    python3 firewall.py
+"""
+
+
 import csv
 import time
 from typing import Optional

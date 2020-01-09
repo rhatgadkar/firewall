@@ -1,3 +1,6 @@
+"""This file defines the data structure to represent a firewall rule."""
+
+
 from ip_address import IPAddress
 
 
