@@ -89,5 +89,6 @@ Add support to delete firewall rules.
 Time spent
 ----------
 I spend 2 hours to implement the naive firewall and most of organized firewall.
-I spent 5 more hours for code organization, comments, unit testing, and 500K
-and 1M testing.
+
+I spent 5 more hours for finishing organized firewall, code organization,
+comments, unit testing, and 500K and 1M testing.
