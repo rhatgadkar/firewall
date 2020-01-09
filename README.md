@@ -7,14 +7,12 @@ on its rules, the firewall is able to accept or block certain packets. If the
 fields of a packet matches a firewall rule, the packet is accepted. Otherwise,
 the packet is blocked.
 
-About `naive_firewall.py`:
 `naive_firewall.py` stores firewall rules in a set. Adding firewall rules is
 fast in the naive firewall, because it is an O(1) operation to append a set.
 But deciding to accept or block a packet in the naive firewall is slow, because
 it involves having to iterate through all the firewall rules in the set.
 
 
-About `firewall.py`:
 `firewall.py` stores firewall rules in an organized manner. Firewall rules that
 contain the same directions, protocols, and port values are stored in the same
 set. This means that there are multiple sets that store firewall rules. Adding
