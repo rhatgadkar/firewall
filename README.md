@@ -78,7 +78,7 @@ rule ("inbound", "tcp", "80", "192.168.56.1-192.168.56.2").
 - Add support to delete firewall rules.
 
 Time spent:
-- I spend 2 hours to implement the naive firewall and most of organized
+- I spent 2 hours to implement the naive firewall and most of organized
   firewall.
 - I spent 5 more hours for finishing organized firewall, code organization,
   comments, unit testing, and 500K and 1M testing.
