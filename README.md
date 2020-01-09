@@ -7,16 +7,14 @@ on its rules, the firewall is able to accept or block certain packets. If the
 fields of a packet matches a firewall rule, the packet is accepted. Otherwise,
 the packet is blocked.
 
-naive_firewall.py
------------------
+About `naive_firewall.py`:
 `naive_firewall.py` stores firewall rules in a set. Adding firewall rules is
 fast in the naive firewall, because it is an O(1) operation to append a set.
 But deciding to accept or block a packet in the naive firewall is slow, because
 it involves having to iterate through all the firewall rules in the set.
 
 
-firewall.py
------------
+About `firewall.py`:
 `firewall.py` stores firewall rules in an organized manner. Firewall rules that
 contain the same directions, protocols, and port values are stored in the same
 set. This means that there are multiple sets that store firewall rules. Adding
@@ -26,8 +24,7 @@ firewall is faster, because each set contains a subset of all the firewall
 rules. And iterating through this subset is faster than iterating through all
 the firewall rules.
 
-Information about the files of this directory
----------------------------------------------
+Information about the files of this directory:
 - `1m_rules.csv`: a generated CSV file with 1M firewall rules.
 - `500k_rules.csv`: a generated CSV file with 500K firewall rules.
 - `firewall.py`: a program that contains the implementation of the organized
@@ -46,16 +43,14 @@ Information about the files of this directory
 - `test_naive_firewall.py`: the unit tests to verify the functionality of
                             `naive_firewall.py`.
 
-Information about testing
--------------------------
-The `test_firewall.py` and `test_naive_firewall.py` contain unit tests to verify
-the correct behavior of accepting packets for the organized firewall and naive
-firewall, respectively.
-
-Manual testing was done with the `1m_rules.csv` and `500k_rules.csv` files. It
-was found that naive firewall performs faster when inserting new firewall rules.
-But the organized firewall performs faster when deciding whether to accept a
-packet or not.
+Information about testing:
+- The `test_firewall.py` and `test_naive_firewall.py` contain unit tests to
+  verify the correct behavior of accepting packets for the organized firewall
+  and naive firewall, respectively.
+- Manual testing was done with the `1m_rules.csv` and `500k_rules.csv` files.
+  It was found that naive firewall performs faster when inserting new firewall
+  rules. But the organized firewall performs faster when deciding whether to
+  accept a packet or not.
 
 Here is sample output of running the programs using `500k_rules.csv`:
 ```
@@ -77,18 +72,15 @@ True
 Firewall time duration to accept packets: 0.0023255348205566406
 ```
 
-Optimizations if I had more time
---------------------------------
-Think about how to add support for merging firewall rules. For example,
+Optimizations if I had more time:
+- Think about how to add support for merging firewall rules. For example,
 rule ("inbound", "tcp", "80", "192.168.56.1") and
 rule ("inbound", "tcp", "80", "192.168.56.2") can be merged into a single
 rule ("inbound", "tcp", "80", "192.168.56.1-192.168.56.2").
+- Add support to delete firewall rules.
 
-Add support to delete firewall rules.
-
-Time spent
-----------
-I spend 2 hours to implement the naive firewall and most of organized firewall.
-
-I spent 5 more hours for finishing organized firewall, code organization,
-comments, unit testing, and 500K and 1M testing.
+Time spent:
+- I spend 2 hours to implement the naive firewall and most of organized
+  firewall.
+- I spent 5 more hours for finishing organized firewall, code organization,
+  comments, unit testing, and 500K and 1M testing.
